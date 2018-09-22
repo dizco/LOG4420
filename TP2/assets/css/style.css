@@ -37,7 +37,7 @@ header {
     height: 60px;
 }
 
-.header-contents nav { /* TODO: Use float-right css class */
+.header-contents nav {
     float: right;
 }
 
@@ -112,6 +112,15 @@ header {
     right: 0;
 }
 
+/* MAIN */
+main {
+    padding: 0 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1 0 auto;
+}
+
 /* FOOTER */
 footer {
     height: 70px;
@@ -121,15 +130,6 @@ footer {
     justify-content: center;
     background-color: #eeeeee;
     border-top: 1px solid #cccccc;
-}
-
-/* MAIN */
-main {
-    padding: 0 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex: 1 0 auto;
 }
 
 /* PRODUCTS */
@@ -175,6 +175,14 @@ main {
     background-color: #ddf2fb;
 }
 
+.products-section .products-heading {
+    align-items: center;
+}
+
+.products-section .products-heading p {
+    margin-left: auto;
+}
+
 #products-list article {
     margin-bottom: 1.2rem;
     border: 1px solid #999999;
@@ -211,10 +219,6 @@ main {
     flex: 1 0 auto;
 }
 
-#products-list img {
-    width: 100%;
-}
-
 #products-list a > p {
     margin: .5rem;
     text-align: right;
@@ -223,8 +227,8 @@ main {
 
 
 /* HELPERS */
-.float-right {
-    float: right;
+img {
+    width: 100%;
 }
 
 .button {
@@ -248,4 +252,12 @@ main {
 .flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
 }
