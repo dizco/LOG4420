@@ -176,7 +176,7 @@ main {
 }
 
 #products-list article {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     border: 1px solid #999999;
     border-radius: 4px;
     -o-transition: .2s ease-out;
@@ -191,7 +191,7 @@ main {
 }
 
 #products-list article:not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 1.2rem;
 }
 
 #products-list a {
@@ -199,23 +199,26 @@ main {
     text-decoration: none;
     height: 100%;
     width: 100%;
-    display: block;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 #products-list a > h2 {
     margin: .5rem;
 }
 
-#products-list a > p {
-    margin: .5rem;
-    position: absolute;
-    right: 0;
-    bottom: .5rem;
+#products-list a > .img-container {
+    flex: 1 0 auto;
 }
 
 #products-list img {
     width: 100%;
+}
+
+#products-list a > p {
+    margin: .5rem;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 
