@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OnlineShop - Panier</title>
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="header-contents">
+      <a href="index.html"><img src="assets/img/logo.svg" alt="Logo" /></a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="products.html">Produits</a>
+        <a href="contact.html">Contact</a>
+        <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+          <span class="active fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x"></i>
+          </span>
+          <span class="count">3</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h1>Panier</h1>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><button>X</button></th>
+            <th><a href="product.html">Produit 1</a></th>
+            <th>2,00$</th>
+            <th>
+              <button>-</button>
+              <span>1</span>
+              <button>+</button>
+            </th>
+            <th>2,00$</th>
+          </tr>
+          <tr>
+            <th><button>X</button></th>
+            <th><a href="product.html">Produit 1</a></th>
+            <th>4,00$</th>
+            <th>
+              <button>-</button>
+              <span>2</span>
+              <button>+</button>
+            </th>
+            <th>8,00$</th>
+          </tr>
+          <tr>
+            <th><button>X</button></th>
+            <th><a href="product.html">Produit 1</a></th>
+            <th>5,00$</th>
+            <th>
+              <button>-</button>
+              <span>2</span>
+              <button>+</button>
+            </th>
+            <th>10,00$</th>
+          </tr>
+        </tbody>
+      </table>
+      <p>Total: 20,00$</p>
+      <div>
+        <button>Vider le panier</button>
+        <a href="order.html">Commander</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>Gabriel Bourgault (1794069) • Félix Boulet (1788287)</p>
+  </footer>
+</body>
+
+</html>

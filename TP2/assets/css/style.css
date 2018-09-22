@@ -1,0 +1,120 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px
+}
+
+body {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    padding: 0px 20px;
+    background-color: #14597f;
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #0b2d3d;
+}
+
+.header-contents {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+}
+
+.header-contents img {
+    float: left;
+    height: 60px;
+}
+
+.header-contents nav {
+    float: right;
+}
+
+.header-contents nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 4px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.header-contents nav a.shopping-cart {
+    padding: 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.header-contents nav a:hover {
+    background-color: #1987b4;
+}
+
+.header-contents nav a.active {
+    background-color: #1fb5e9;
+}
+
+.header-contents nav a.shopping-cart:hover {
+    background-color: inherit;
+}
+
+.shopping-cart {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.shopping-cart .fa-stack {
+    align-items: left;
+    padding: 0.5rem;
+    border-radius: 50%;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.shopping-cart .fa-stack:hover {
+    background-color: #1987b4;
+}
+
+.shopping-cart .fa-stack.active {
+    background-color: #1fb5e9;
+}
+
+.shopping-cart .fa-shopping-cart {
+    color: #14597f;
+    display: inline-block;
+}
+
+.shopping-cart .count {
+    display: inline-block;
+    background-color: #d9534f;
+    border-radius: 50%;
+    width: 1.25rem;
+    line-height: 1.25rem;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    bottom: -1rem;
+    right: 0rem;
+}
+
+footer {
+    height: 70px;
+}
+
+main {
+    padding: 0px 20px;
+    max-width: 1200px;
+    margin: 0px auto;
+}
