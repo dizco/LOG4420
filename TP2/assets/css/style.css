@@ -73,7 +73,6 @@ header {
 }
 
 .shopping-cart .fa-stack {
-    align-items: left;
     padding: 0.5rem;
     border-radius: 50%;
     -o-transition: .5s;
