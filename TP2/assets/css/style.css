@@ -2,11 +2,14 @@ html,
 body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 body {
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADER */
@@ -112,6 +115,12 @@ header {
 /* FOOTER */
 footer {
     height: 70px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    border-top: 1px solid #cccccc;
 }
 
 /* MAIN */
@@ -119,6 +128,7 @@ main {
     padding: 0 20px;
     max-width: 1200px;
     margin: 0 auto;
+    flex: 1 0 auto;
 }
 
 /* INDEX */
