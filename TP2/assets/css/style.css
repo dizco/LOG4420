@@ -224,10 +224,19 @@ footer {
     flex-shrink: 0;
 }
 
+/* PRODUCT */
+.product-footer {
+    align-items: center;
+}
+
+.product-footer form {
+    margin-left: auto;
+}
+
 
 /* HELPERS */
 img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .button {
@@ -237,6 +246,7 @@ img {
     text-decoration: none;
     padding: .8rem;
     border-radius: 4px;
+    cursor: pointer;
     -o-transition: .2s ease-out;
     -ms-transition: .2s ease-out;
     -moz-transition: .2s ease-out;
@@ -259,4 +269,23 @@ img {
 
 .flex-2 {
     flex: 2;
+}
+
+.flex-column {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.form-control {
+    padding: 0.5rem;
+    border: 1px solid #999999;
+    border-radius: 4px;
+}
+
+.form-control-sm {
+    width: 2.5rem;
+}
+
+.bold {
+    font-weight: bold;
 }
