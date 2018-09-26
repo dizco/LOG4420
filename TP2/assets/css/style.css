@@ -24,12 +24,10 @@ header {
 }
 
 .header-contents {
-    margin: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
 }
 
 .header-contents img {
