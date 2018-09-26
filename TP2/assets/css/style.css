@@ -115,8 +115,6 @@ header {
 /* MAIN */
 main {
     padding: 0 20px;
-    max-width: 1200px;
-    margin: 0 auto;
     flex: 1 0 auto;
 }
 
@@ -288,4 +286,9 @@ img {
 
 .bold {
     font-weight: bold;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
