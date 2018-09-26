@@ -229,6 +229,30 @@ footer {
     margin-left: auto;
 }
 
+/* CONTACT */
+.contact-informations {
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+.contact-informations > div {
+    text-align: center;
+    padding: 2rem;
+}
+
+.contact-informations > div i {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+}
+
+.contact-informations > div a {
+    color: #1fb5e9;
+    text-decoration: none;
+}
+
+.contact-informations > div a:hover {
+    text-decoration: underline;
+}
 
 /* HELPERS */
 img {
