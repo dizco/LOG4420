@@ -1,3 +1,5 @@
+/* GÉNÉRAL */
+
 html,
 body {
     margin: 0;
@@ -13,6 +15,7 @@ body {
 }
 
 /* HEADER */
+
 header {
     width: 100%;
     height: 60px;
@@ -111,12 +114,14 @@ header {
 }
 
 /* MAIN */
+
 main {
     padding: 0 20px;
     flex: 1 0 auto;
 }
 
 /* FOOTER */
+
 footer {
     height: 70px;
     flex-shrink: 0;
@@ -128,6 +133,7 @@ footer {
 }
 
 /* PRODUCTS */
+
 .products-aside {
     flex: 1;
     padding-right: 10px;
@@ -170,14 +176,6 @@ footer {
     background-color: #ddf2fb;
 }
 
-.products-section .products-heading {
-    align-items: center;
-}
-
-.products-section .products-heading p {
-    margin-left: auto;
-}
-
 #products-list article {
     margin-bottom: 1.2rem;
     border: 1px solid #999999;
@@ -206,21 +204,22 @@ footer {
     flex-direction: column;
 }
 
-#products-list a > h2 {
+#products-list a>h2 {
     margin: .5rem;
 }
 
-#products-list a > .img-container {
+#products-list a>.img-container {
     flex: 1 0 auto;
 }
 
-#products-list a > p {
+#products-list a>p {
     margin: .5rem;
     text-align: right;
     flex-shrink: 0;
 }
 
 /* PRODUCT */
+
 .product-footer {
     align-items: center;
 }
@@ -230,33 +229,122 @@ footer {
 }
 
 /* CONTACT */
+
 .contact-informations {
     border: 1px solid grey;
     border-radius: 4px;
 }
 
-.contact-informations > div {
+.contact-informations>div {
     text-align: center;
     padding: 2rem;
 }
 
-.contact-informations > div i {
+.contact-informations>div i {
     font-size: 4rem;
     padding-bottom: 1rem;
 }
 
-.contact-informations > div a {
+.contact-informations>div a {
     color: #1fb5e9;
     text-decoration: none;
 }
 
-.contact-informations > div a:hover {
+.contact-informations>div a:hover {
     text-decoration: underline;
 }
 
+/* SHOPPING CART PAGE */
+
+#cart-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#cart-table>thead,
+#cart-table>tbody {
+    border-bottom: 1px solid black;
+}
+
+#cart-table td {
+    text-align: center;
+}
+
+#cart-table th:first-child,
+#cart-table td:first-child {
+    width: 30px;
+    padding: 0;
+}
+
+#cart-table th:last-child,
+#cart-table td:last-child {
+    text-align: right;
+}
+
+#cart-table button {
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: #dddddd;
+    border: none;
+    box-shadow: none;
+    -o-transition: .2s ease-out;
+    -ms-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    -webkit-transition: .2s ease-out;
+    transition: .2s ease-out;
+    outline: none;
+    cursor: pointer;
+}
+
+#cart-table button:hover {
+    background-color: #bbbbbb;
+}
+
+#cart-table button.red-shadow {
+    margin: 0.5rem 0rem;
+}
+
+#cart-table button.blue-shadow {
+    margin: 0.5rem 1rem;
+}
+
+#cart-table button.red-shadow:hover {
+    box-shadow: 0px 0px 0px 3px #ff0000;
+}
+
+#cart-table button.blue-shadow:hover {
+    box-shadow: 0px 0px 0px 3px #1fb5e9;
+}
+
+/* ORDER */
+
+#order-form button {
+    float: right;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 /* HELPERS */
+
 img {
     max-width: 100%;
+}
+
+form label {
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.align-right {
+    text-align: right;
 }
 
 .button {
@@ -278,9 +366,34 @@ img {
     background-color: #1fb5e9;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.flex-column:first-of-type {
+    padding-left: 0rem;
+}
+
+.flex-column:last-of-type {
+    padding-right: 0rem;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.flex-row:first-of-type {
+    padding-top: 0rem;
+}
+
+.flex-row:last-of-type {
+    padding-bottom: 0rem;
 }
 
 .flex-1 {
@@ -291,9 +404,8 @@ img {
     flex: 2;
 }
 
-.flex-column {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.flex-no-pad {
+    padding: 0;
 }
 
 .form-control {
@@ -306,11 +418,17 @@ img {
     width: 2.5rem;
 }
 
-.bold {
-    font-weight: bold;
+.flex-spaced-out {
+    align-items: center;
+    justify-content: space-between;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+.flex-stretch {
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.flex-right {
+    align-items: right;
+    justify-content: space-between;
 }

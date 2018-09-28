@@ -27,9 +27,10 @@
     </div>
   </header>
   <main>
-    <section>
+    <section class="container">
       <h1>Panier</h1>
-      <table>
+      <form action="order.html">
+      <table id="cart-table">
         <thead>
           <tr>
             <th></th>
@@ -41,44 +42,44 @@
         </thead>
         <tbody>
           <tr>
-            <th><button>X</button></th>
-            <th><a href="product.html">Produit 1</a></th>
-            <th>2,00$</th>
-            <th>
-              <button>-</button>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>2,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
               <span>1</span>
-              <button>+</button>
-            </th>
-            <th>2,00$</th>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>2,00$</td>
           </tr>
           <tr>
-            <th><button>X</button></th>
-            <th><a href="product.html">Produit 1</a></th>
-            <th>4,00$</th>
-            <th>
-              <button>-</button>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>4,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
               <span>2</span>
-              <button>+</button>
-            </th>
-            <th>8,00$</th>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>8,00$</td>
           </tr>
           <tr>
-            <th><button>X</button></th>
-            <th><a href="product.html">Produit 1</a></th>
-            <th>5,00$</th>
-            <th>
-              <button>-</button>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>5,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
               <span>2</span>
-              <button>+</button>
-            </th>
-            <th>10,00$</th>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>10,00$</td>
           </tr>
         </tbody>
       </table>
-      <p>Total: 20,00$</p>
-      <div>
-        <button>Vider le panier</button>
-        <a href="order.html">Commander</a>
+      <p class="align-right">Total: <strong>20,00$</strong></p>
+      <div class="flex-row flex-spaced-out">
+        <button class="button" type="button"><i class="fa fa-trash-alt fa-fw"></i>  Vider le panier</button>
+        <button class="button" type="submit"><i class="fa fa-check fa-fw"></i>  Commander</button>
       </div>
     </section>
   </main>
