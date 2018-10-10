@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OnlineShop - Panier</title>
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="container header-contents">
+      <a href="index.html"><img src="assets/img/logo.svg" alt="Logo" /></a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="products.html">Produits</a>
+        <a href="contact.html">Contact</a>
+        <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+          <span class="active fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x"></i>
+          </span>
+          <span class="count">3</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="container">
+      <h1>Panier</h1>
+      <form action="order.html">
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>2,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
+              <span>1</span>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>2,00$</td>
+          </tr>
+          <tr>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>4,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
+              <span>2</span>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>8,00$</td>
+          </tr>
+          <tr>
+            <td><button class="red-shadow" type="button"><i class="fa fa-times"></i></button></td>
+            <td><a href="product.html">Produit 1</a></td>
+            <td>5,00$</td>
+            <td>
+              <button class="blue-shadow" type="button"><i class="fa fa-minus"></i></button>
+              <span>2</span>
+              <button class="blue-shadow" type="button"><i class="fa fa-plus"></i></button>
+            </td>
+            <td>10,00$</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="align-right">Total: <strong>20,00$</strong></p>
+      <div class="flex-row flex-spaced-out">
+        <button class="button" type="button"><i class="fa fa-trash-alt fa-fw"></i>  Vider le panier</button>
+        <button class="button" type="submit"><i class="fa fa-check fa-fw"></i>  Commander</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>Gabriel Bourgault (1794069) • Félix Boulet (1788287)</p>
+  </footer>
+</body>
+
+</html>
