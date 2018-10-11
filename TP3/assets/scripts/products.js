@@ -1,10 +1,57 @@
 'use strict';
 
 $(document).ready(function() {
+  let products = [];
   loadProducts();
 
+  $('#product-categories button').click(function() {
+    removeSelections($('#product-categories'));
+    $(this).addClass('selected');
+
+    updateProductsList();
+  });
+
+  $('#product-criteria button').click(function() {
+    removeSelections($('#product-criteria'));
+    $(this).addClass('selected');
+
+    updateProductsList();
+  });
+
+  function updateProductsList() {
+
+    const filter = $('#product-categories button.selected').data('filter');
+    const filteredProducts = products.filter((product) => product.category.includes(filter));
+
+    const sort = $('#product-criteria button.selected').data('sort');
+    const sortAlgorithm = chooseSortAlgorithm(sort);
+    const sortedProducts = filteredProducts.sort(sortAlgorithm);
+    displayProductsCount(sortedProducts.length);
+    displayProductsList(sortedProducts);
+  }
+
+  function chooseSortAlgorithm(type) {
+    if (type === 'price-low') {
+      return (product1, product2) => product1.price - product2.price;
+    }
+    else if (type === 'price-high') {
+      return (product1, product2) => product2.price - product1.price;
+    }
+    else if (type === 'alphabetical') {
+      return (product1, product2) => product1.name.localeCompare(product2.name);
+    }
+    else if (type === 'reverse-alphabetical') {
+      return (product1, product2) => product2.name.localeCompare(product1.name);
+    }
+    return () => 0; //Leave unchanged...
+  }
+
+  function removeSelections(wrapper) {
+    $(wrapper).find('button').removeClass('selected');
+  }
+
   async function loadProducts() {
-    let products = await fetchProducts();
+    products = await fetchProducts();
     displayProductsCount(products.length);
     displayProductsList(products);
   }

@@ -32,20 +32,20 @@
         <section>
           <h2>Catégories</h2>
           <div id="product-categories" class="filter">
-            <button>Appareils photo</button>
-            <button>Consoles</button>
-            <button>Écrans</button>
-            <button>Ordinateurs</button>
-            <button class="selected">Tous les produits</button>
+            <button data-filter="cameras">Appareils photo</button>
+            <button data-filter="consoles">Consoles</button>
+            <button data-filter="screens">Écrans</button>
+            <button data-filter="computers">Ordinateurs</button>
+            <button data-filter="" class="selected">Tous les produits</button>
           </div>
         </section>
         <section>
           <h2>Classement</h2>
           <div id="product-criteria" class="filter">
-            <button class="selected">Prix (bas-haut)</button>
-            <button>Prix (haut-bas)</button>
-            <button>Nom (A-Z)</button>
-            <button>Nom (Z-A)</button>
+            <button data-sort="price-low" class="selected">Prix (bas-haut)</button>
+            <button data-sort="price-high">Prix (haut-bas)</button>
+            <button data-sort="alphabetical">Nom (A-Z)</button>
+            <button data-sort="reverse-alphabetical">Nom (Z-A)</button>
           </div>
         </section>
       </aside>
