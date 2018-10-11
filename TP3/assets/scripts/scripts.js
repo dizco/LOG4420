@@ -72,6 +72,30 @@ const shoppingCart = {
 
 /* HELPERS */
 
+function urlParam(name) {
+  //Source: https://www.sitepoint.com/url-parameters-jquery/
+  let results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+  if (results == null) {
+    return null;
+  }
+  else {
+    return results[1] || 0;
+  }
+}
+
+function formatPrice(price) {
+  const parsedFloat = parseFloat(price);
+  //return parsedFloat.toLocaleString('fr-CA');
+  return parsedFloat.toFixed(2).replace('.', ',');
+}
+
+function fetchProduct(productId) {
+  return fetchProducts()
+    .then((products) => {
+      return products.find((p) => parseInt(p.id) === parseInt(productId));
+    });
+}
+
 function fetchProducts() {
   return window.fetch(`/data/products.json`)
     .then((response) => response.json())

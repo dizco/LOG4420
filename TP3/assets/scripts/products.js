@@ -69,10 +69,4 @@ $(document).ready(function() {
     article.appendChild(link);
     return article;
   }
-
-  function formatPrice(price) {
-    const parsedFloat = parseFloat(price);
-    //return parsedFloat.toLocaleString('fr-CA');
-    return parsedFloat.toFixed(2).replace('.', ',');
-  }
 });
