@@ -69,3 +69,13 @@ const shoppingCart = {
   },
 };
 
+
+/* HELPERS */
+
+function fetchProducts() {
+  return window.fetch(`/data/products.json`)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Error while fetching products', error);
+    });
+}
