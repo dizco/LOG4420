@@ -9,8 +9,9 @@ const PRODUCTS_KEY = 'shopping_cart_products';
 const shoppingCart = {
   size: () => {
     let products = shoppingCart.products();
-
-    return products.length;
+    let totalSize = 0;
+    products.forEach((product) => totalSize += parseInt(product.quantity));
+    return totalSize;
   },
   products: () => {
     let serializedProducts = localStorage.getItem(PRODUCTS_KEY);
@@ -61,7 +62,7 @@ const shoppingCart = {
     const shoppingCartSize = shoppingCart.size();
     if ($shoppingCartBadge && $shoppingCartBadge.length > 0 && shoppingCartSize > 0) {
       $shoppingCartBadge.show();
-      $shoppingCartBadge[0].innerText = shoppingCartSize;
+      $shoppingCartBadge.text(shoppingCartSize);
     }
     else {
       $shoppingCartBadge.hide();
