@@ -19,7 +19,6 @@ $(document).ready(function() {
   });
 
   function updateProductsList() {
-
     const filter = $('#product-categories button.selected').data('filter');
     const filteredProducts = products.filter((product) => product.category.includes(filter));
 
@@ -52,8 +51,7 @@ $(document).ready(function() {
 
   async function loadProducts() {
     products = await fetchProducts();
-    displayProductsCount(products.length);
-    displayProductsList(products);
+    updateProductsList();
   }
 
   function displayProductsCount(count) {

@@ -228,6 +228,18 @@ footer {
     margin-left: auto;
 }
 
+#dialog {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+#dialog > span {
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+}
+
 /* CONTACT */
 
 .contact-informations {
@@ -406,6 +418,10 @@ form label {
 
 .flex-no-pad {
     padding: 0;
+}
+
+.justify-space-between {
+  justify-content: space-between;
 }
 
 .form-control {
