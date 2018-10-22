@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OnlineShop - Commande</title>
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="container header-contents">
+      <a href="index.html"><img src="assets/img/logo.svg" alt="Logo" /></a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="products.html">Produits</a>
+        <a href="contact.html">Contact</a>
+        <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x"></i>
+          </span>
+          <span class="count"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="container">
+      <h1>Votre commande</h1>
+      <form id="order-form" action="confirmation.html">
+        <section>
+          <h2>Contact</h2>
+          <div class="flex-row flex-stretch">
+            <div class="flex-1 flex-column">
+              <label for="first-name">Prénom : </label>
+              <input class="form-control" type="text" placeholder="Michel" id="first-name" required />
+            </div>
+            <div class="flex-1 flex-column">
+              <label for="last-name">Nom : </label>
+              <input class="form-control" type="text" placeholder="Gagnon" id="last-name" required />
+            </div>
+          </div>
+          <div class="flex-row flex-stretch">
+            <div class="flex-1 flex-column">
+              <label for="email">Adresse courriel : </label>
+              <input class="form-control" type="email" placeholder="example@polymtl.ca" id="email" required />
+            </div>
+            <div class="flex-1 flex-column">
+              <label for="phone">Numéro de téléphone : </label>
+              <input class="form-control" type="tel" placeholder="(514) 254-6011" id="phone" required />
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Paiement</h2>
+          <div class="flex-row flex-stretch">
+            <div class="flex-1 flex-column">
+              <label for="credit-card">Numéro de carte de crédit : </label>
+              <input class="form-control" type="text" placeholder="#### #### #### ####" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}|[0-9]{16}"
+                id="credit-card" required />
+            </div>
+            <!-- On accepte l'entrée de style XXXX XXXX XXXX XXXX mais aussi YYYYYYYYYYYYYYYY -->
+            <!-- Impossible d'ajouter automatiquement les espaces sans Javascript :( -->
+            <div class="flex-1 flex-column">
+              <label for="credit-card-expiry">Date d'expiration de la carte : </label>
+              <input class="form-control" type="month" min="2018-09" pattern="[0-9]{4}-[0-9]{2}" id="credit-card-expiry"
+                required />
+            </div>
+            <!-- L'attribut pattern n'est normalement pas géré par type=month, qui est incompatible avec certains navigateurs (e.g. Firefox). -->
+            <!-- Ce field est transformé en type=text dans ces navigateurs, donc le pattern sert à le valider quand même avec le même format. -->
+          </div>
+        </section>
+        <button class="button" type="submit"><i class="fa fa-credit-card fa-fw"></i>  Payer</i></button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>Gabriel Bourgault (1794069) • Félix Boulet (1788287)</p>
+  </footer>
+
+  <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="./assets/scripts/scripts.js"></script>
+
+</body>
+
+</html>

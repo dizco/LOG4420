@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OnlineShop - Produit</title>
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="container header-contents">
+      <a href="index.html"><img src="assets/img/logo.svg" alt="Logo" /></a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a class="active" href="products.html">Produits</a>
+        <a href="contact.html">Contact</a>
+        <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x"></i>
+          </span>
+          <span class="count"></span>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main class="flex-column justify-space-between">
+    <article class="container">
+      <h1 id="product-name"></h1>
+      <div class="flex-row" id="product-details">
+        <div class="flex-1 flex-column">
+          <img id="product-image" src="" alt="" />
+        </div>
+        <div class="flex-1 flex-column">
+          <section>
+            <h2>Description</h2>
+            <p id="product-desc"></p>
+          </section>
+          <section>
+            <h2>Caractéristiques</h2>
+            <ul id="product-features"></ul>
+          </section>
+          <hr>
+          <div class="flex-row product-footer">
+            <p id="product-price"></p>
+            <form id="add-to-cart-form">
+              <label for="qtyField">Quantité: </label>
+              <input class="form-control form-control-sm" type="number" id="qtyField" min="1" placeholder="1" value="1" />
+              <button class="button" type="submit"><i class="fa fa-shopping-cart fa-fw"></i>Ajouter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div id="dialog">
+      <span>Le produit a été ajouté au panier.</span>
+    </div>
+  </main>
+  <footer>
+    <p>Gabriel Bourgault (1794069) • Félix Boulet (1788287)</p>
+  </footer>
+
+  <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="./assets/scripts/scripts.js"></script>
+  <script type="text/javascript" src="./assets/scripts/product.js"></script>
+
+</body>
+
+</html>
