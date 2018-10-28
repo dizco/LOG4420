@@ -14,12 +14,19 @@ $(document).ready(function () {
         if (shoppingCart.products().length === 0) {
             hideCart();
         }
-        for (const productRef of shoppingCart.products()) {
-            let product = await fetchProduct(productRef.id);
-            if (product) {
+
+        let products = await fetchProducts();
+        products.sort((product1, product2) => product1.name.localeCompare(product2.name));
+
+        const productRefs = shoppingCart.products();
+
+        for (const product of products) {
+            const productRef = productRefs.find((p) => p.id == product.id);
+            if (productRef) {
                 $cartList.append(createCartElement(product, productRef.quantity));
             }
         }
+
         updateCartTotal();
     }
 
@@ -145,6 +152,7 @@ $(document).ready(function () {
 
     function createSubtotalCell(product, quantity) {
         const tableCell = document.createElement('td');
+        tableCell.className = "price"
 
         const subtotal = document.createTextNode(formatPrice(product.price * quantity));
 
@@ -168,9 +176,9 @@ $(document).ready(function () {
 
     function updateCartTotal() {
         let total = 0.0;
-        $('[id^=subtotal]').each(function () {
+        $('.price').each(function () {
             total += parsePrice($(this).text());
         });
-        $('#cart-total').html(formatPrice(total));
+        $('#total-amount').html(formatPrice(total));
     }
 });
