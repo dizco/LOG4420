@@ -316,11 +316,15 @@ footer {
     background-color: #bbbbbb;
 }
 
+#cart-table button:disabled {
+    pointer-events: none;
+}
+
 #cart-table button.red-shadow {
     margin: 0.5rem 0rem;
 }
 
-#cart-table button.blue-shadow {
+#cart-table button.blue-shadow, #cart-table button.no-shadow {
     margin: 0.5rem 1rem;
 }
 

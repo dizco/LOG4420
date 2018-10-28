@@ -10,8 +10,8 @@ $(document).ready(function() {
   if ($addProductForm) {
     $addProductForm.submit(function(event) {
       event.preventDefault();
-      const quantity = $addProductForm.find('#qtyField').val();
-      shoppingCart.add(quantity || 1, {id: urlParam('id')});
+      const quantity = parseInt($addProductForm.find('#qtyField').val());
+      shoppingCart.add(quantity || 1, urlParam('id'));
 
       //Show notification for 5 seconds
       clearTimeout(timeout);
@@ -42,7 +42,7 @@ $(document).ready(function() {
       const price = $('#product-price');
       price.append(document.createTextNode('Prix: '));
       const strongPrice = document.createElement('strong');
-      strongPrice.appendChild(document.createTextNode(formatPrice(product.price) + '$'));
+      strongPrice.appendChild(document.createTextNode(formatPrice(product.price)));
       price.append(strongPrice);
     }
     else {

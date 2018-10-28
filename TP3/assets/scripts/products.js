@@ -1,6 +1,8 @@
 'use strict';
 
 $(document).ready(function() {
+  //TODO: REMOVE THIS!!! ONLY HELPS DEBUGGING
+  //localStorage.clear();
   let products = [];
   loadProducts();
 
@@ -101,7 +103,7 @@ $(document).ready(function() {
     const price = document.createElement('p');
     price.appendChild(document.createTextNode('Prix '));
     const strongPrice = document.createElement('strong');
-    strongPrice.appendChild(document.createTextNode(formatPrice(product.price) + '$'));
+    strongPrice.appendChild(document.createTextNode(formatPrice(product.price)));
     price.appendChild(strongPrice);
 
     const link = document.createElement('a');

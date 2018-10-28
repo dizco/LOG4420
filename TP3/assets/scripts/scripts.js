@@ -23,11 +23,12 @@ const shoppingCart = {
     return products;
   },
   add: (quantity, productId) => {
-    console.log('add', quantity, productId);
+    //console.log('add', quantity, productId);
     let products = shoppingCart.products();
-    let productFound = products.find((p) => p.id === productId);
+    // Weak comparison to allow comparing p.id string and productId int
+    let productFound = products.find((p) => p.id == productId);
     if (productFound) {
-      productFound.quantity += quantity;
+      productFound.quantity = parseInt(productFound.quantity) + quantity;
     }
     else {
       products.push({id: productId, quantity: quantity});
@@ -35,10 +36,15 @@ const shoppingCart = {
     localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
     shoppingCart.update();
   },
+  removeEverything: () => {
+    localStorage.clear();
+    shoppingCart.update();
+  },
   removeOne: (productId) => {
     let products = shoppingCart.products();
-    let productFound = products.find((p) => p.id === productId);
-    if (productFound) {
+    // Weak comparison to allow comparing p.id string and productId int
+    let productFound = products.find((p) => p.id == productId);
+    if (productFound && productFound.quantity > 1) {
       productFound.quantity--;
       if (productFound.quantity <= 1) {
         //TODO: Disable button to decrement on the shopping cart page
@@ -49,7 +55,8 @@ const shoppingCart = {
   },
   removeAll: (productId) => {
     let products = shoppingCart.products();
-    products = products.filter((p) => p.id !== productId);
+    // Weak comparison to allow comparing p.id string and productId int
+    products = products.filter((p) => p.id != productId);
     localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
     shoppingCart.update();
   },
@@ -87,7 +94,12 @@ function urlParam(name) {
 function formatPrice(price) {
   const parsedFloat = parseFloat(price);
   //return parsedFloat.toLocaleString('fr-CA');
-  return parsedFloat.toFixed(2).replace('.', ',');
+  // Espace insécable entre le prix et le symbole de dollars.
+  return parsedFloat.toFixed(2).replace('.', ',') + "\xA0$";
+}
+
+function parsePrice(price) {
+  return parseFloat(price.replace(',', '.').replace(/[^0-9.]+/g, ""));
 }
 
 function fetchProduct(productId) {
