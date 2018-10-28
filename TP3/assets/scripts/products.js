@@ -1,8 +1,6 @@
 'use strict';
 
 $(document).ready(function() {
-  //TODO: REMOVE THIS!!! ONLY HELPS DEBUGGING
-  //localStorage.clear();
   let products = [];
   loadProducts();
 

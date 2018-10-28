@@ -5,6 +5,7 @@ $(document).ready(function() {
 });
 
 const PRODUCTS_KEY = 'shopping_cart_products';
+const ORDERS_KEY = 'orders';
 
 const shoppingCart = {
   size: () => {
@@ -23,7 +24,6 @@ const shoppingCart = {
     return products;
   },
   add: (quantity, productId) => {
-    //console.log('add', quantity, productId);
     let products = shoppingCart.products();
     // Weak comparison to allow comparing p.id string and productId int
     let productFound = products.find((p) => p.id == productId);
@@ -37,7 +37,7 @@ const shoppingCart = {
     shoppingCart.update();
   },
   removeEverything: () => {
-    localStorage.clear();
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify([]));
     shoppingCart.update();
   },
   removeOne: (productId) => {
@@ -75,6 +75,34 @@ const shoppingCart = {
       $shoppingCartBadge.hide();
     }
   },
+};
+
+const completedOrders = {
+  orders: () => {
+    let serializedOrders = localStorage.getItem(ORDERS_KEY);
+    let orders = [];
+    if (serializedOrders) {
+      orders = JSON.parse(serializedOrders);
+    }
+
+    return orders;
+  },
+  add: (firstName, lastName) => {
+    let orders = completedOrders.orders();
+
+    orders.push({id: orders.length + 1, firstName: firstName, lastName: lastName});
+
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+  },
+  getLast: () => {
+    let orders = completedOrders.orders();
+    if (orders.length > 0) {
+      return orders[orders.length - 1];
+    }
+    else {
+      return {id: 0, firstName: "Unknown", lastName: "User"};
+    }
+  }
 };
 
 

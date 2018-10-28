@@ -28,12 +28,14 @@ $(document).ready(function () {
         }
 
         updateCartTotal();
-    }
+        }
 
     function emptyCart() {
-        // Ask for confirmation here
-        shoppingCart.removeEverything();
-        hideCart();
+        if (confirm("Voulez-vous supprimer tous les produits du panier?")) {
+            shoppingCart.removeEverything();
+            $cartList.empty();
+            hideCart();
+        }
     }
 
     function hideCart() {
@@ -61,12 +63,13 @@ $(document).ready(function () {
         removeIcon.className = "fa fa-times";
         removeButton.appendChild(removeIcon);
         removeButton.onclick = function () {
-            // Display confirmation dialog here
-            tableCell.parentNode.parentNode.removeChild(tableCell.parentNode);
-            shoppingCart.removeAll(product.id);
-            updateCartTotal();
-            if (shoppingCart.products().length === 0) {
-                hideCart();
+            if (confirm("Voulez-vous supprimer le produit du panier?")) {
+                tableCell.parentNode.parentNode.removeChild(tableCell.parentNode);
+                shoppingCart.removeAll(product.id);
+                updateCartTotal();
+                if (shoppingCart.products().length === 0) {
+                    hideCart();
+                }  
             }
         }
 
