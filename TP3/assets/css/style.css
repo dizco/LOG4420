@@ -363,6 +363,11 @@ form label {
     font-weight: bold;
 }
 
+form label.error {
+    font-size: small;
+    color: #cc0000
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

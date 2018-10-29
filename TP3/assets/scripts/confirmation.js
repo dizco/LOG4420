@@ -6,7 +6,7 @@ $(document).ready(function () {
     $('#name').html(fullName);
     $('#confirmation-number').html(pad(lastOrder.id, 6))
 
-    function pad(num, size){
+    function pad(num, size) {
         return ('000000000' + num).substr(-size);
     }
 });

@@ -1,17 +1,17 @@
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(function () {
   let products = [];
   loadProducts();
 
-  $('#product-categories button').click(function() {
+  $('#product-categories button').click(function () {
     removeSelections($('#product-categories'));
     $(this).addClass('selected');
 
     updateProductsList();
   });
 
-  $('#product-criteria button').click(function() {
+  $('#product-criteria button').click(function () {
     removeSelections($('#product-criteria'));
     $(this).addClass('selected');
 
@@ -55,7 +55,7 @@ $(document).ready(function() {
   }
 
   function displayProductsCount(count) {
-    const text = '' + count + ' produit'  + ((count > 1) ? 's' : '');
+    const text = '' + count + ' produit' + ((count > 1) ? 's' : '');
     $('#products-count').text(text);
   }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('#dialog').hide();
   loadProduct();
 
@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   const $addProductForm = $('#add-to-cart-form');
   if ($addProductForm) {
-    $addProductForm.submit(function(event) {
+    $addProductForm.submit(function (event) {
       event.preventDefault();
       const quantity = parseInt($addProductForm.find('#qtyField').val());
       shoppingCart.add(quantity || 1, urlParam('id'));

@@ -28,7 +28,7 @@ $(document).ready(function () {
         }
 
         updateCartTotal();
-        }
+    }
 
     function emptyCart() {
         if (confirm("Voulez-vous supprimer tous les produits du panier?")) {
@@ -69,7 +69,7 @@ $(document).ready(function () {
                 updateCartTotal();
                 if (shoppingCart.products().length === 0) {
                     hideCart();
-                }  
+                }
             }
         }
 

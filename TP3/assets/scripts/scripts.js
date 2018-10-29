@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(function () {
   shoppingCart.update();
 });
 
@@ -31,7 +31,7 @@ const shoppingCart = {
       productFound.quantity = parseInt(productFound.quantity) + quantity;
     }
     else {
-      products.push({id: productId, quantity: quantity});
+      products.push({ id: productId, quantity: quantity });
     }
     localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
     shoppingCart.update();
@@ -90,7 +90,7 @@ const completedOrders = {
   add: (firstName, lastName) => {
     let orders = completedOrders.orders();
 
-    orders.push({id: orders.length + 1, firstName: firstName, lastName: lastName});
+    orders.push({ id: orders.length + 1, firstName: firstName, lastName: lastName });
 
     localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
   },
@@ -100,7 +100,7 @@ const completedOrders = {
       return orders[orders.length - 1];
     }
     else {
-      return {id: 0, firstName: "Unknown", lastName: "User"};
+      return { id: 0, firstName: "Unknown", lastName: "User" };
     }
   }
 };
