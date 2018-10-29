@@ -27,10 +27,10 @@ $(document).ready(function() {
     let product = await fetchProduct(urlParam('id'));
     if (product) {
       $('#product-details').show();
-      $('#product-name').text(product.name);
+      $('#product-name').html(product.name);
       $('#product-image').attr('src', 'assets/img/' + product.image);
       $('#product-image').attr('alt', product.name);
-      $('#product-desc').text(product.description);
+      $('#product-desc').html(product.description);
       const productFeatures = $('#product-features');
       product.features.forEach((feature) => {
         const listElement = document.createElement('li');
@@ -46,7 +46,8 @@ $(document).ready(function() {
       price.append(strongPrice);
     }
     else {
-      $('#product-details').hide();
+      $('#product-details').remove();
+      $('#dialog').remove();
       $('#product-name').text('Page non trouvée!');
     }
   }

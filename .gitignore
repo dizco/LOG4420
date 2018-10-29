@@ -1,4 +1,6 @@
 .idea/
 .editorconfig
-temps.txt
+temps*.txt
 *.zip
+*.log
+CHROME*.xml

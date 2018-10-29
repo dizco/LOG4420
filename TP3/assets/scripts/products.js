@@ -60,30 +60,14 @@ $(document).ready(function() {
   }
 
   function displayProductsList(products) {
-    const PRODUCTS_PER_ROW = 3;
     const $productsList = $('#products-list');
 
     $productsList.empty();
 
-    let row = createRowElement();
     for (let i = 0; i < products.length; i++) {
       let product = createProductElement(products[i]);
-
-      row.append(product);
-
-      if ((i + 1) % PRODUCTS_PER_ROW === 0) {
-        $productsList.append(row);
-        row = createRowElement();
-      }
+      $productsList.append(product);
     }
-
-    $productsList.append(row);
-  }
-
-  function createRowElement() {
-    let row = document.createElement('div');
-    row.className = 'flex-row flex-no-pad';
-    return row;
   }
 
   function createProductElement(product) {
@@ -110,8 +94,9 @@ $(document).ready(function() {
     link.appendChild(imageContainer);
     link.appendChild(price);
 
-    const article = document.createElement('article');
-    article.appendChild(link);
-    return article;
+    const container = document.createElement('div');
+    container.className = "product";
+    container.appendChild(link);
+    return container;
   }
 });
