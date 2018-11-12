@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Order = new Schema({
@@ -10,4 +10,4 @@ const Order = new Schema({
   products: Array
 }, { versionKey: false });
 
-module.exports = mongoose.model("Order", Order);
+module.exports = mongoose.model('Order', Order);

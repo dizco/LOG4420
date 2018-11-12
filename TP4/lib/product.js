@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Product = new Schema({
@@ -11,4 +11,4 @@ const Product = new Schema({
   features: Array
 }, { versionKey: false });
 
-module.exports = mongoose.model("Product", Product);
+module.exports = mongoose.model('Product', Product);
