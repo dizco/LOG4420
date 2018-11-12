@@ -8,6 +8,9 @@ const session = require("express-session");
 
 require("./lib/db");
 const index = require("./routes/index");
+const products = require("./routes/products");
+const shoppingCart = require("./routes/shopping-cart");
+const orders = require("./routes/orders");
 
 const app = express();
 
@@ -35,6 +38,9 @@ app.use(session({
 }));
 
 app.use("/", index);
+app.use("/api/products", products);
+app.use("/api/shopping-cart", shoppingCart);
+app.use("/api/orders", orders);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {
