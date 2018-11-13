@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const orderSchema = new Schema({
+const Order = new Schema({
   id: { type: Number, unique: true },
   firstName: String,
   lastName: String,
@@ -10,6 +10,4 @@ const orderSchema = new Schema({
   products: Array
 }, { versionKey: false });
 
-const Order = mongoose.model('Order', orderSchema);
-
-export { Order };
+module.exports = mongoose.model('Order', Order);
