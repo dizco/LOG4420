@@ -32,7 +32,7 @@ router.get('/', [
     .then((products) =>  res.json(products))
     .catch((err) => {
       console.error('Error executing mongoose', err);
-      res.json({ success: false, error: err })
+      res.json({ success: false, error: err });
     });
 });
 
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
     .then((product) => res.json(product))
     .catch((err) => {
       console.error('Error fetching product by id', err);
-      res.status(err.statusCode || 500).json({ success: false, error: err.message })
+      res.status(err.statusCode || 500).json({ success: false, error: err.message });
     });
 });
 
@@ -83,12 +83,12 @@ router.delete('/:id', (req, res) => {
         .then(() => res.status(204).send())
         .catch((err) => {
           console.error('Error deleting product by id', err);
-          res.status(err.statusCode || 500).json({ success: false, error: err.message })
+          res.status(err.statusCode || 500).json({ success: false, error: err.message });
         });
     })
     .catch((err) => {
       console.error('Error fetching product by id', err);
-      res.status(err.statusCode || 500).json({ success: false, error: err.message })
+      res.status(err.statusCode || 500).json({ success: false, error: err.message });
     });
 });
 
@@ -98,7 +98,7 @@ router.delete('/', (req, res) => {
     .then(() => res.status(204).send())
     .catch((err) => {
       console.error('Error executing mongoose', err);
-      res.json({ success: false, error: err })
+      res.json({ success: false, error: err });
     });
 });
 
