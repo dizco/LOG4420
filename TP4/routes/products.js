@@ -43,7 +43,7 @@ router.post('/', [
     if (err) {
       throw err;
     }
-    res.json({ success: true });
+    res.status(201).json({ success: true });
   });
 });
 
@@ -52,7 +52,7 @@ router.delete('/:id', (req, res) => {
   findProductById(req.params.id)
     .then((product) => {
       product.remove()
-        .then(() => res.json({ success: true }))
+        .then(() => res.status(204).send())
         .catch((err) => {
           console.error('Error deleting product by id', err);
           res.status(err.statusCode || 500).json({ success: false, error: err.message })
@@ -67,7 +67,7 @@ router.delete('/:id', (req, res) => {
 //Delete all products
 router.delete('/', (req, res) => {
   Product.remove({})
-    .then(() => res.json({ success: true }))
+    .then(() => res.status(204).send())
     .catch((err) => {
       console.error('Error executing mongoose', err);
       res.json({ success: false, error: err })
