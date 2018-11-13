@@ -27,7 +27,14 @@ router.get('/:id', (req, res) => {
 
 //Create new product
 router.post('/', [
-  body('id').isInt().withMessage('Id must be an integer'),
+  body('id').isInt().withMessage('Id must be an integer').custom(value => {
+    return Product.find({ id: value })
+      .then(product => {
+        if (product && product.length > 0) {
+          return Promise.reject('Id already in use');
+        }
+      });
+  }),
   body('name').isString().withMessage('Name must be a string').isLength({ min: 1 }).withMessage('Name cannot be empty'),
   body('price').isNumeric().withMessage('Price must be numeric'),
   body('image').isString().withMessage('Image must be a string').isLength({ min: 1 }).withMessage('Image cannot be empty'),
