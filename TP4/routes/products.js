@@ -38,7 +38,7 @@ router.get('/', [
 
 //Get product by id
 router.get('/:id', (req, res) => {
-  findProductById(req.params.id)
+  findProductById(req.params.id, true)
     .then((product) => res.json(product))
     .catch((err) => {
       console.error('Error fetching product by id', err);
@@ -102,8 +102,9 @@ router.delete('/', (req, res) => {
     });
 });
 
-function findProductById(id) {
-  return Product.find({ id: id }, { _id: 0 })
+function findProductById(id, removeObjectId = false) {
+  const projection = (removeObjectId) ? { _id: 0 } : {};
+  return Product.find({ id: id }, projection)
     .sort({ 'id': 1 })
     .limit(1)
     .then((products) => {
