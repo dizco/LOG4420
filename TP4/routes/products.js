@@ -1,9 +1,9 @@
-import { checkValidationResult } from '../lib/check-validation-result';
-import { QueryError } from '../lib/query-error';
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator/check');
 const Product = require('../lib/product');
+const QueryError = require('../lib/query-error');
+const checkValidationResult = require('../lib/check-validation-result');
 
 //Get all products
 router.get('/', (req, res) => {
