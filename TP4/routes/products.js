@@ -10,7 +10,6 @@ router.get('/', [
   query('category').optional().isIn(['cameras', 'computers', 'consoles', 'screens']).withMessage('Category must be one of: cameras, computers, consoles, screens'),
   query('criteria').optional().isIn(['alpha-asc', 'alpha-dsc', 'price-asc', 'price-dsc']).withMessage('Criteria must be one of: alpha-asc, alpha-dsc, price-asc, price-dsc'),
 ], checkValidationResult, (req, res) => {
-  console.log('query', req.query);
   const filter = {};
   if (req.query.category) {
     filter.category = req.query.category;
