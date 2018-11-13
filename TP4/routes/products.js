@@ -1,13 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const { body } = require('express-validator/check');
+const { body, query } = require('express-validator/check');
 const Product = require('../lib/product');
 const QueryError = require('../lib/query-error');
 const checkValidationResult = require('../lib/check-validation-result');
 
 //Get all products
-router.get('/', (req, res) => {
-  Product.find({})
+router.get('/', [
+  query('category').optional().isIn(['cameras', 'computers', 'consoles', 'screens']).withMessage('Category must be one of: cameras, computers, consoles, screens'),
+  query('criteria').optional().isIn(['alpha-asc', 'alpha-dsc', 'price-asc', 'price-dsc']).withMessage('Criteria must be one of: alpha-asc, alpha-dsc, price-asc, price-dsc'),
+], checkValidationResult, (req, res) => {
+  console.log('query', req.query);
+  const filter = {};
+  if (req.query.category) {
+    filter.category = req.query.category;
+  }
+  let sort = { price: 1 };
+  switch (req.query.criteria) {
+    case 'alpha-asc':
+      sort = { name: 1 };
+      break;
+    case 'alpha-dsc':
+      sort = { name: -1 };
+      break;
+    case 'price-dsc':
+      sort = { price: -1 };
+      break;
+  }
+  Product.find(filter)
+    .collation({ locale:'en', strength: 2 })
+    .sort(sort)
     .then((products) =>  res.json(products))
     .catch((err) => {
       console.error('Error executing mongoose', err);
@@ -41,7 +63,7 @@ router.post('/', [
   body('category').isIn(['cameras', 'computers', 'consoles', 'screens']).withMessage('Category must be one of: cameras, computers, consoles, screens'),
   body('description').isString().withMessage('Description must be a string').isLength({ min: 1 }).withMessage('Description cannot be empty'),
   body('features').isArray().withMessage('Features must be an array'),
-  body('features.*').isString().withMessage('Features must strings').isLength({ min: 1}).withMessage('A feature cannot be empty'),
+  body('features.*').isString().withMessage('Features must be strings').isLength({ min: 1}).withMessage('A feature cannot be empty'),
 ], checkValidationResult, (req, res) => {
   let product = new Product({
     ...req.body
