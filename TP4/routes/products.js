@@ -26,7 +26,7 @@ router.get('/', [
       sort = { price: -1 };
       break;
   }
-  Product.find(filter)
+  Product.find(filter, { _id: 0 })
     .collation({ locale:'en', strength: 2 })
     .sort(sort)
     .then((products) =>  res.json(products))
@@ -103,8 +103,8 @@ router.delete('/', (req, res) => {
 });
 
 function findProductById(id) {
-  return Product.find({id: id})
-    .sort({'id': 1})
+  return Product.find({ id: id }, { _id: 0 })
+    .sort({ 'id': 1 })
     .limit(1)
     .then((products) => {
       if (products && products.length > 0) {
