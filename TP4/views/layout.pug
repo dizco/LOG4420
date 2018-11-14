@@ -1,7 +1,42 @@
 doctype html
-html
+html(lang='fr')
   head
-    title= title
-    link(rel='stylesheet', href='/assets/css/default.css')
+    meta(charset='UTF-8')
+    title OnlineShop - #{title}
+    link(rel='stylesheet', type='text/css', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href='./assets/css/style.css')
   body
-    block content
+    header
+      block header
+        .header-container
+          .logo
+            a(href='./accueil')
+              img(alt='logo', src='./assets/img/logo.svg', title='Accueil')
+          nav
+            ul
+              li
+                a(href='./accueil') Accueil
+              li
+                a(href='./produits') Produits
+              li
+                a(href='./contact') Contact
+              li
+                a.shopping-cart(href='./panier', title='Panier')
+                  span.fa-stack.fa-lg
+                    i.fa.fa-circle.fa-stack-2x.fa-inverse
+                    i.fa.fa-shopping-cart.fa-stack-1x
+                  if cartCount > 0
+                    span.count #{cartCount}
+    main
+      block content
+    //- Content goes here
+    //- block something something
+    footer
+      block footer
+        p Par Félix Boulet et Gabriel Bourgault
+    
+    block scripts
+      script(type='text/javascript', src='./assets/js/jquery-3.2.1.min.js')
+      script(type='text/javascript', src='./assets/scripts/utils.js')
+      script(type='text/javascript', src='./assets/scripts/shopping-cart.service.js')
+      script(type='text/javascript', src='./assets/scripts/shopping-cart.controller.js')
