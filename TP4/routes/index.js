@@ -35,7 +35,13 @@ router.get('/contact', (req, res) => {
 });
 
 router.get('/panier', (req, res) => {
-  res.render('shopping-cart', { title: 'Panier', cartCount: countCart(req.session.shoppingCart) });
+  loadShoppingCart(req.session.shoppingCart).then((sortedCart) => {
+    res.render('shopping-cart', { title: 'Panier', cartCount: countCart(req.session.shoppingCart), cart: sortedCart, priceFn: formatPrice });
+  })
+  .catch((err) => {
+    res.render('shopping-cart', { title: 'Panier', cartCount: countCart(req.session.shoppingCart), cart: [], priceFn: formatPrice });
+  });
+  
 });
 
 router.get('/commande', (req, res) => {
@@ -76,6 +82,36 @@ function loadProductById(id, removeObjectId = false) {
       }
       throw new QueryError('Product not found', 404);
     });
+}
+
+function loadShoppingCart(shoppingCart) {
+  let promises = [];
+  if (shoppingCart)
+  {
+    shoppingCart.forEach((item) => {
+      const promise = loadProductById(item.productId, true);
+      promises.push(promise);
+    });
+  }
+  return Promise.all(promises).then((products) => {
+    products.forEach((product) => {
+      corresponding = shoppingCart.find((shopProduct) => shopProduct.productId == product.id);
+      if (corresponding)
+      {
+        product.quantity = corresponding.quantity;
+      }
+      else
+      {
+        product.quantity = 0;
+      }
+    });
+
+    return products.sort((a, b) => { return a.name.localeCompare(b.name) });
+
+  })
+  .catch((err) => {
+    console.error('Error validating products in cart', err); throw err;
+  });
 }
 
 function formatPrice(price)
