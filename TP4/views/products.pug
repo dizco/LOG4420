@@ -9,18 +9,36 @@ block content
                 button(data-category='consoles') Consoles
                 button(data-category='screens') Écrans
                 button(data-category='computers') Ordinateurs
-                button(data-category='all') Tous les produits
+                button.selected(data-category='all') Tous les produits
         section
             h2 Classement
             #product-criteria.btn-group.vertical
-                button(data-criteria='price-asc') Prix (bas-haut)
+                button.selected(data-criteria='price-asc') Prix (bas-haut)
                 button(data-criteria='price-dsc') Prix (haut-bas)
                 button(data-criteria='alpha-asc') Nom (A-Z)
                 button(data-criteria='alpha-dsc') Nom (Z-A)
     article
-        span#products-count.right-header 13 produits
+        span#products-count.right-header #{products.length} produits
         h1 Produits
         #products-list.products
-            .loading
+            each product in products
+                .product(data-product-id=product.id)
+                    a(href='/produits/' + product.id, title='En savoir plus...')
+                        h2 #{product.name}
+                        img(alt='product', src='/assets/img/' + product.image)
+                        p.price
+                            small Prix
+                            |  !{priceFn(product.price)}
+            if error                
+                .loading
+
+append scripts
+    script(type='text/javascript', src='/assets/scripts/products.service.js')
+    script(type='text/javascript', src='/assets/scripts/products.controller.js')
+            
+
+
+                
+
 
 

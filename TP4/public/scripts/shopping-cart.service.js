@@ -1,170 +1,116 @@
 var onlineShop = onlineShop || {};
 
 /**
- * Defines a service to manage the shopping cart.
+ * Controls the "shopping cart" view and the elements associated with the shopping cart.
  *
  * @author Antoine Beland <antoine.beland@polymtl.ca>
  * @author Konstantinos Lambrou-Latreille <konstantinos.lambrou-latreille@polymtl.ca>
  */
-onlineShop.shoppingCartService = (($, productsService) => {
+(($, shoppingCartService, utils) => {
   "use strict";
 
-  const self = {};
-  let promise = undefined;
-
   /**
-   * Adds an item in the shopping cart.
+   * Updates the shopping cart count to display.
    *
-   * @param productId   The ID associated with the product to add.
-   * @param [quantity]  The quantity of the product.
-   * @return            A promise.
-   */
-  self.addItem = (productId, quantity) => {
-    return _getItemsFromAPI().then(items => {
-      const itemFound = items.find(item => item.productId === productId);
-      if (!itemFound) {
-        promise = undefined;
-        return $.ajax({
-          url: "/api/shopping-cart",
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({ productId: productId, quantity: quantity })
-        });
-      } else {
-        return self.updateItemQuantity(productId, itemFound.quantity + quantity);
-      }
-    });
-  };
-
-  /**
-   * Gets the items in the shopping cart.
-   *
-   * @returns {jquery.promise}    A promise that contains the list of items in the shopping cart.
-   */
-  self.getItems = () => {
-    return $.when(productsService.getProducts("alpha-asc"), _getItemsFromAPI()).then((products, items) => {
-      function getItemAssociatedWithProduct(productId) {
-        return items.find(item => item.productId === productId);
-      }
-      return products.filter(product => getItemAssociatedWithProduct(product.id) !== undefined)
-        .map(product => {
-          const item = getItemAssociatedWithProduct(product.id);
-          return {
-            product: product,
-            quantity: item.quantity,
-            total: product.price * item.quantity
-          };
-        });
-    });
-  };
-
-  /**
-   * Gets the item associated with the specified product ID.
-   *
-   * @param productId             The product ID associated with the item to retrieve.
-   * @return {jquery.promise}     A promise that contrains the item associated with the ID specified.
-   */
-  self.getItem = productId => {
-    return self.getItems().then(items => {
-      return items.find(item => item.product.id === productId)
-    });
-  };
-
-  /**
-   * Gets the items count in the shopping cart.
-   *
-   * @returns {jquery.promise}    A promise that contains the items count.
-   */
-  self.getItemsCount = () => {
-    return _getItemsFromAPI().then(items => items.reduce((sum, item) => sum + +item.quantity, 0));
-  };
-
-  /**
-   * Gets the quantity associated with an item.
-   *
-   * @param productId             The product ID associated with the item quantity to retrieve.
-   * @returns {jquery.promise}    A promise that contains the quantity associated with the specified item.
-   */
-  self.getItemQuantity = productId => {
-    return _getItemsFromAPI().then(items => {
-      const itemFound = items.find(item => item.productId === productId);
-      return (itemFound) ? itemFound.quantity : 0;
-    });
-  };
-
-  /**
-   * Gets the total amount of the products in the shopping cart.
-   *
-   * @returns {jquery.promise}    A promise that contains the total amount.
-   */
-  self.getTotalAmount = () => {
-    return self.getItems().then(items => {
-      let total = 0;
-      items.forEach(item => {
-        if (item) {
-          total += item.total;
-        }
-      });
-      return total;
-    });
-  };
-
-  /**
-   * Updates the quantity associated with a specified item.
-   *
-   * @param productId   The product ID associated with the item to update.
-   * @param quantity    The item quantity.
-   * @return            A promise.
-   */
-  self.updateItemQuantity = (productId, quantity) => {
-    promise = undefined;
-    return $.ajax({
-      url: "/api/shopping-cart/" + productId,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify({ quantity: quantity })
-    });
-  };
-
-  /**
-   * Removes the specified item in the shopping cart.
-   *
-   * @param productId   The product ID associated with the item to remove.
-   * @return            A promise.
-   */
-  self.removeItem = productId => {
-    promise = undefined;
-    return $.ajax({
-      url: "/api/shopping-cart/" + productId,
-      type: "DELETE"
-    });
-  };
-
-  /**
-   * Removes all the items in the shopping cart.
-   *
-   * @return  A promise.
-   */
-  self.removeAllItems = () => {
-    promise = undefined;
-    return $.ajax({
-      url: "/api/shopping-cart/",
-      type: "DELETE"
-    });
-  };
-
-  /**
-   * Gets the items in the shopping cart from the API.
-   *
-   * @return A promise that contains the items list.
    * @private
    */
-  function _getItemsFromAPI() {
-    if (!promise) {
-      promise = $.get("/api/shopping-cart/").then(items => items);
-    }
-    return promise;
+  function _updateCount() {
+    shoppingCartService.getItemsCount().done(itemsCount => {
+      const countElement = $(".shopping-cart").find(".count");
+      if (itemsCount > 0) {
+        countElement.addClass("visible").text(itemsCount);
+      } else {
+        countElement.removeClass("visible");
+      }
+    });
   }
 
-  return self;
-})(jQuery, onlineShop.productsService);
+  /**
+   * Updates the total amount to display.
+   *
+   * @private
+   */
+  function _updateTotalAmount() {
+    shoppingCartService.getTotalAmount().done(total => {
+      $("#total-amount").html(utils.formatPrice(total));
+    });
+  }
+
+  /**
+   * Renders the view when the shopping cart is empty.
+   *
+   * @private
+   */
+  function _renderEmptyView() {
+    $("#shopping-cart-container").html("<p>Aucun produit dans le panier.</p>");
+  }
+
+  // Initializes the "add to cart" form.
+  $("#add-to-cart-form").submit(e => {
+    e.preventDefault();
+    const productId = +$(e.target).attr("data-product-id");
+    shoppingCartService.addItem(productId, +$(e.target).find("input").val()).done(() => {
+      const dialog = $("#dialog");
+      dialog.fadeIn();
+      setTimeout(() => dialog.fadeOut(), 5000);
+
+      _updateCount();
+      shoppingCartService.getItemQuantity(productId).done(quantity => $("#shopping-cart-quantity").text(quantity));
+    });
+  });
+
+  // Initializes the shopping cart table.
+  $(".shopping-cart-table > tbody >  tr").each(function() {
+    const rowElement = $(this);
+    const productId = +rowElement.attr("data-product-id");
+
+    // Updates the quantity for a specific item and update the view.
+    function updateQuantity(quantity) {
+      rowElement.find(".remove-quantity-button").prop("disabled", quantity <= 1);
+      shoppingCartService.updateItemQuantity(productId, quantity).done(() => {
+		_updateCount();
+		_updateTotalAmount();
+	  });
+      rowElement.find(".quantity").text(quantity);
+      shoppingCartService.getItem(productId).done(item => {
+        rowElement.find(".price").html(utils.formatPrice(item.product["price"] * quantity));
+      });
+    }
+
+    rowElement.find(".remove-item-button").click(() => {
+      if (confirm("Voulez-vous supprimer le produit du panier?")) {
+        shoppingCartService.removeItem(productId);
+        rowElement.remove();
+        shoppingCartService.getItemsCount().done(itemsCount => {
+          if (itemsCount === 0) {
+            _renderEmptyView();
+          } else {
+            _updateTotalAmount();
+          }
+        });
+        _updateCount();
+      }
+    });
+    rowElement.find(".remove-quantity-button").click(() => {
+      shoppingCartService.getItemQuantity(productId).done(quantity => {
+        updateQuantity(quantity - 1);
+      });
+    });
+    rowElement.find(".add-quantity-button").click(() => {
+      shoppingCartService.getItemQuantity(productId).done(quantity => {
+        updateQuantity(quantity + 1);
+      });
+    });
+  });
+
+  // Initializes the "remove all items" button.
+  $("#remove-all-items-button").click(() => {
+    if (confirm("Voulez-vous supprimer tous les produits du panier?")) {
+      shoppingCartService.removeAllItems().done(() => {
+		_renderEmptyView();
+		_updateCount();   
+	  });
+    }
+  });
+
+})(jQuery, onlineShop.shoppingCartService, onlineShop.utils);
