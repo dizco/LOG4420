@@ -17,7 +17,7 @@ router.get('/:productId', (req, res) => {
     res.json(item);
   }
   else {
-    res.status(404).json({ success: false, error: 'Product not found' });
+    res.status(404).json({ success: false, error: 'Page non trouvée!' });
   }
 });
 
@@ -56,7 +56,7 @@ router.put('/:productId', [
     return res.status(204).send();
   }
   else {
-    res.status(404).json({ success: false, error: 'Product not found' });
+    res.status(404).json({ success: false, error: 'Page non trouvée!' });
   }
 });
 
@@ -69,7 +69,7 @@ router.delete('/:productId', (req, res) => {
     res.status(204).send();
   }
   else {
-    res.status(404).json({ success: false, error: 'Product not found' });
+    res.status(404).json({ success: false, error: 'Page non trouvée!' });
   }
 });
 

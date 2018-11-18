@@ -40,7 +40,7 @@ router.post('/', [
   body('lastName').isString().withMessage('Last name must be a string').isLength({ min: 1 }).withMessage('Last name cannot be empty'),
   body('email').isEmail(),
   body('phone').matches(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/).withMessage('Phone number must be valid'), //See https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s02.html
-  body('products').isArray().withMessage('Products must be an array'),
+  body('products').isArray().withMessage('Products must be an array').isLength({ min: 1 }).withMessage('Product array cannot be empty'),
   body('products.*.id').isInt().withMessage('Product id must be an integer').custom(value => {
     return Product.find({ id: value })
       .then(product => {

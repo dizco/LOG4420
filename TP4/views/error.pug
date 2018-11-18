@@ -2,5 +2,4 @@ extends layout
 
 block content
   #unflexthis
-    h1 #{error.status || error.statusCode} : #{error.message}
-    pre #{error.stack}
+    h1 #{error.message || error.statusMessage}

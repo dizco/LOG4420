@@ -111,7 +111,7 @@ function findProductById(id, removeObjectId = false) {
       if (products && products.length > 0) {
         return products[0];
       }
-      throw new QueryError('Product not found', 404);
+      throw new QueryError('Page non trouvée!', 404);
     });
 }
 
