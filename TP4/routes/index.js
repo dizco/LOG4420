@@ -3,9 +3,6 @@ const router = express.Router();
 const Product = require('../lib/product');
 const Order = require('../lib/order');
 const QueryError = require('../lib/query-error');
-const request = require('request');
-const { body } = require('express-validator/check');
-const checkValidationResult = require('../lib/check-validation-result');
 
 router.get('/', (req, res) => {
   res.render('index', { title: 'Accueil', cartCount: countCart(req.session.shoppingCart) });
@@ -113,7 +110,7 @@ function loadProductById(id, removeObjectId = false) {
 function loadShoppingCart(shoppingCart) {
   return validateShoppingCart(shoppingCart).then((products) => {
     products.forEach((product) => {
-      corresponding = shoppingCart.find((shopProduct) => shopProduct.productId == product.id);
+      let corresponding = shoppingCart.find((shopProduct) => shopProduct.productId == product.id);
       if (corresponding) {
         product.quantity = corresponding.quantity;
       }
