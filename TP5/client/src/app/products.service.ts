@@ -47,9 +47,12 @@ export class ProductsService {
    * @return {Promise<Product[]>}   The category of the product. The default value is "all".
    */
   getProducts(sortingCriteria?: string, category?: string): Promise<Product[]> {
-    let url = `${Config.apiUrl}/products?criteria=${sortingCriteria}`;
+    let url = `${Config.apiUrl}/products?`;
+    if (sortingCriteria) {
+      url += `criteria=${sortingCriteria}&`;
+    }
     if (category && category !== 'all') {
-      url += `&category=${category}`;
+      url += `category=${category}`;
     }
     return this.http.get(url)
       .toPromise()
