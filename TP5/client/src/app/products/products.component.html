@@ -2,32 +2,44 @@
   <section>
     <h2>Catégories</h2>
     <div class="btn-group vertical" id="product-categories">
-      <button>Appareils photo</button>
-      <button>Consoles</button>
-      <button>Écrans</button>
-      <button>Ordinateurs</button>
-      <button class="selected">Tous les produits</button>
+      <button [class.selected]="category === productsCategories.Cameras" (click)="filterByCategory(productsCategories.Cameras)">Appareils photo</button>
+      <button [class.selected]="category === productsCategories.Consoles" (click)="filterByCategory(productsCategories.Consoles)">Consoles</button>
+      <button [class.selected]="category === productsCategories.Screens" (click)="filterByCategory(productsCategories.Screens)">Écrans</button>
+      <button [class.selected]="category === productsCategories.Computers" (click)="filterByCategory(productsCategories.Computers)">Ordinateurs</button>
+      <button [class.selected]="category === productsCategories.All" (click)="filterByCategory(productsCategories.All)">Tous les produits</button>
     </div>
   </section>
   <section>
     <h2>Classement</h2>
     <div class="btn-group vertical" id="product-criteria">
-      <button class="selected">Prix (bas-haut)</button>
-      <button>Prix (haut-bas)</button>
-      <button>Nom (A-Z)</button>
-      <button>Nom (Z-A)</button>
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceLowHigh"
+              (click)="sortByCriteria(productsSortingCriteria.PriceLowHigh)">
+        Prix (bas-haut)
+      </button>
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceHighLow"
+              (click)="sortByCriteria(productsSortingCriteria.PriceHighLow)">
+        Prix (haut-bas)
+      </button>
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaAscending"
+              (click)="sortByCriteria(productsSortingCriteria.AlphaAscending)">
+        Nom (A-Z)
+      </button>
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaDescending"
+              (click)="sortByCriteria(productsSortingCriteria.AlphaDescending)">
+        Nom (Z-A)
+      </button>
     </div>
   </section>
 </section>
 <article>
-  <span class="right-header" id="products-count">6 produits</span>
+  <span class="right-header" id="products-count">{{products.length}} produits</span>
   <h1>Produits</h1>
   <div class="products" id="products-list">
     <div class="product" *ngFor="let product of products">
       <a routerLink="/produits/{{product.id}}" title="En savoir plus...">
         <h2>{{product.name}}</h2>
         <img alt="{{product.name}}" src="./assets/img/{{product.image}}">
-        <p><small>Prix</small> {{product.price}}&thinsp;$</p><!-- TODO: Pipe price to use commas -->
+        <p><small>Prix</small> {{product.price | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</p>
       </a>
     </div>
   </div>

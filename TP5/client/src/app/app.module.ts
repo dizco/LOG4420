@@ -14,6 +14,11 @@ import { OrderComponent } from './order/order.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsService } from './products.service';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { NoSpacesPipe } from './no-spaces.pipe';
+
+registerLocaleData(localeFr);
 
 // Application routes
 const appRoutes: Routes = [
@@ -25,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'panier', component: ShoppingCartComponent },
   { path: 'commande', component: OrderComponent },
   { path: 'confirmation', component: ConfirmationComponent },
+  { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -38,7 +44,8 @@ const appRoutes: Routes = [
     ShoppingCartComponent,
     OrderComponent,
     ConfirmationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NoSpacesPipe
   ],
   imports: [
     BrowserModule,

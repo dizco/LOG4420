@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product, ProductsService } from '../products.service';
+import { ProductsCategories, Product, ProductsService, ProductsSortingCriteria } from '../products.service';
 
 /**
  * Defines the component responsible to manage the display of the products page.
@@ -9,10 +9,34 @@ import { Product, ProductsService } from '../products.service';
   templateUrl: './products.component.html'
 })
 export class ProductsComponent {
+  productsSortingCriteria = ProductsSortingCriteria; //See https://stackoverflow.com/questions/44045311/cannot-approach-typescript-enum-within-html
+  productsCategories = ProductsCategories;
+
+  sortingCriteria: string = ProductsSortingCriteria.PriceLowHigh;
+  category: string = ProductsCategories.All;
+
   products: Product[] = [];
 
   constructor(private productsService: ProductsService) {
-    this.productsService.getProducts().then(products => this.products = products);
+    this.refreshProducts();
   }
-  // TODO: À compléter
+
+  sortByCriteria(sortingCriteria: ProductsSortingCriteria): void {
+    this.sortingCriteria = sortingCriteria;
+    this.refreshProducts();
+  }
+
+  filterByCategory(category: ProductsCategories): void {
+    this.category = category;
+    this.refreshProducts();
+  }
+
+  private refreshProducts(): void {
+    this.productsService.getProducts(this.sortingCriteria, this.category)
+      .subscribe(response => {
+        if (response.success) {
+          this.products = response.data;
+        }
+      });
+  }
 }

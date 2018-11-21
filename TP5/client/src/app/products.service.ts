@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Config } from './config';
+import { catchError, map, take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { ApiResponse } from './api-response';
 
 /**
  * Defines a product.
@@ -15,22 +18,26 @@ export class Product {
   features: string[];
 }
 
+export enum ProductsSortingCriteria {
+  PriceLowHigh = 'price-asc',
+  PriceHighLow = 'price-dsc',
+  AlphaAscending = 'alpha-asc',
+  AlphaDescending = 'alpha-dsc',
+}
+
+export enum ProductsCategories {
+  Cameras = 'cameras',
+  Computers = 'computers',
+  Consoles = 'consoles',
+  Screens = 'screens',
+  All = '',
+}
+
 /**
  * Defines the service responsible to retrieve the products in the database.
  */
 @Injectable()
 export class ProductsService {
-
-  /**
-   * Handles the current error.
-   *
-   * @param error                   The error to handle.
-   * @return {Promise<object>}      A promise object.
-   */
-  private static handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.feedbackMessage || error);
-  }
 
   /**
    * Initializes a new instance of the ProductsService class.
@@ -46,7 +53,7 @@ export class ProductsService {
    * @param [category]              The category of the product. The default value is "all".
    * @return {Promise<Product[]>}   The category of the product. The default value is "all".
    */
-  getProducts(sortingCriteria?: string, category?: string): Promise<Product[]> {
+  getProducts(sortingCriteria?: string, category?: string): Observable<ApiResponse<Product[]>> {
     const url = `${Config.apiUrl}/products`;
     let params = new HttpParams();
     if (category && category !== 'all') {
@@ -55,10 +62,16 @@ export class ProductsService {
     if (sortingCriteria) {
       params = params.append('criteria', sortingCriteria);
     }
-    return this.http.get(url, {params: params})
-      .toPromise()
-      .then(products => products as Product[])
-      .catch(ProductsService.handleError);
+
+    return this.http.get<Product[]>(url, {params: params})
+      .pipe(
+        take(1),
+        map(products => new ApiResponse<Product[]>(true, products)),
+        catchError(err => {
+          console.error('An error occurred', err);
+          return of(new ApiResponse<Product[]>(false, null, err))
+        })
+      );
   }
 
   /**
@@ -67,11 +80,16 @@ export class ProductsService {
    * @param productId               The product ID associated with the product to retrieve.
    * @returns {Promise<Product>}    A promise that contains the product associated with the ID specified.
    */
-  getProduct(productId: number): Promise<Product> {
+  getProduct(productId: number): Observable<ApiResponse<Product>> {
     const url = `${Config.apiUrl}/products/${productId}`;
-    return this.http.get(url)
-      .toPromise()
-      .then(product => product as Product)
-      .catch(() => null);
+    return this.http.get<Product>(url)
+      .pipe(
+        take(1),
+        map(product => new ApiResponse<Product>(true, product)),
+        catchError(err => {
+          console.error('An error occurred', err);
+          return of(new ApiResponse<Product>(false, null, err))
+        })
+      );
   }
 }
