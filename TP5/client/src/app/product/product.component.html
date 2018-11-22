@@ -7,9 +7,7 @@
     <div class="col">
       <section>
         <h2>Description</h2>
-        <p id="product-desc">
-          {{product.description}}
-        </p>
+        <p id="product-desc" [innerHTML]="product.description"></p>
       </section>
       <section>
         <h2>Caractéristiques</h2>
