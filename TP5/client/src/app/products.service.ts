@@ -69,8 +69,8 @@ export class ProductsService {
         map(products => new ApiResponse<Product[]>(true, products)),
         catchError(err => {
           console.error('An error occurred', err);
-          return of(new ApiResponse<Product[]>(false, null, err))
-        })
+          return of(new ApiResponse<Product[]>(false, null, err));
+        }),
       );
   }
 
@@ -88,8 +88,8 @@ export class ProductsService {
         map(product => new ApiResponse<Product>(true, product)),
         catchError(err => {
           console.error('An error occurred', err);
-          return of(new ApiResponse<Product>(false, null, err))
-        })
+          return of(new ApiResponse<Product>(false, null, err));
+        }),
       );
   }
 }

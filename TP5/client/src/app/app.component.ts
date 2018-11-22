@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShoppingCartService } from './shopping-cart.service';
 
 /**
  * Defines the main component of the application.
@@ -14,5 +15,14 @@ export class AppComponent {
     'Gabriel Bourgault'
   ];
 
-  // TODO: À compléter
+  itemsCount = 0;
+
+  constructor(private shoppingCartService: ShoppingCartService) {
+    this.shoppingCartService.getItemsCount()
+      .subscribe(response => {
+        if (response.success) {
+          this.itemsCount = response.data;
+        }
+      });
+  }
 }
