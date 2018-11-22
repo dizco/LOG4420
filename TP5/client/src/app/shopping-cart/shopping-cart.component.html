@@ -1,16 +1,20 @@
 <article>
   <h1>Panier</h1>
-  <table class="table shopping-cart-table">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Produit</th>
-      <th>Prix unitaire</th>
-      <th>Quantité</th>
-      <th>Prix</th>
-    </tr>
-    </thead>
-    <tbody>
+  <ng-container *ngIf="items && items.length > 0; then shoppingCart else noItems">
+
+  </ng-container>
+  <ng-template #shoppingCart>
+    <table class="table shopping-cart-table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Produit</th>
+        <th>Prix unitaire</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+      </tr>
+      </thead>
+      <tbody>
       <tr *ngFor="let item of items">
         <td>
           <button class="remove-item-button" title="Supprimer" (click)="removeItem(item.product.id)">
@@ -37,9 +41,13 @@
         </td>
         <td class="price">{{(item.product.price * item.quantity) | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</td>
       </tr>
-    </tbody>
-  </table>
-  <p class="shopping-cart-total">Total: <strong id="total-amount">{{totalPrice() | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</strong></p>
-  <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
-  <button class="btn" id="remove-all-items-button" (click)="emptyCart()"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
+      </tbody>
+    </table>
+    <p class="shopping-cart-total">Total: <strong id="total-amount">{{totalPrice() | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</strong></p>
+    <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
+    <button class="btn" id="remove-all-items-button" (click)="emptyCart()"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
+  </ng-template>
+  <ng-template #noItems>
+    <p>Aucun produit dans le panier.</p>
+  </ng-template>
 </article>

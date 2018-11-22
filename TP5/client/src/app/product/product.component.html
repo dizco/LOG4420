@@ -12,22 +12,22 @@
       <section>
         <h2>Caractéristiques</h2>
         <ul id="product-features">
-          <li *ngFor="let feature of product.features">{{feature}}</li>
+          <li *ngFor="let feature of product.features" [innerHTML]="feature"></li>
         </ul>
       </section>
       <hr>
       <form class="pull-right" id="add-to-cart-form">
         <label for="product-quantity">Quantité:</label>
         <input class="form-control" id="product-quantity" name="product-quantity"
-               type="number" value="1" min="1" required>&nbsp;
-        <button class="btn" title="Ajouter au panier" type="submit">
+               type="number" value="1" min="1" required #quantity>&nbsp;
+        <button class="btn" title="Ajouter au panier" type="submit" (click)="addToCart(quantity.value)">
           <i class="fa fa-cart-plus"></i>&nbsp; Ajouter
         </button>
       </form>
       <p>Prix: <strong id="product-price">{{product.price | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</strong></p>
     </div>
   </div>
-  <div class="dialog" id="dialog" *ngIf="false">
+  <div class="dialog" id="dialog" *ngIf="displayDialog">
     Le produit a été ajouté au panier.
   </div>
 </article>

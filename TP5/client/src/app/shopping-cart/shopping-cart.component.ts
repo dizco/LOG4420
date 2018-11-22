@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShoppingCartItem, ShoppingCartService } from '../shopping-cart.service';
-import { forkJoin } from 'rxjs';
 
 /**
  * Defines the component responsible to manage the shopping cart page.
@@ -9,24 +8,17 @@ import { forkJoin } from 'rxjs';
   selector: 'shopping-cart',
   templateUrl: './shopping-cart.component.html'
 })
-export class ShoppingCartComponent {
-  items: ShoppingCartItem[] = [];
+export class ShoppingCartComponent implements OnInit {
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService) { }
 
-    const obs = forkJoin(
-      shoppingCartService.addItem({productId: 2, quantity: 2}),
-      shoppingCartService.addItem({productId: 3, quantity: 2}),
-      shoppingCartService.addItem({productId: 4, quantity: 2}),
-    );
-    obs.subscribe(() => {
-      shoppingCartService.getItems()
-        .subscribe(response => {
-          if (response.success) {
-            this.items = response.data;
-          }
-        });
-    });
+  ngOnInit(): void {
+    this.shoppingCartService.loadItems()
+      .subscribe();
+  }
+
+  get items(): ShoppingCartItem[] {
+    return this.shoppingCartService.items; //Reference items stored in the shared service
   }
 
   totalPrice(): number {
@@ -39,28 +31,16 @@ export class ShoppingCartComponent {
 
   removeItem(productId: number): void {
     this.shoppingCartService.removeItem(productId)
-      .subscribe(response => {
-        if (response.success) {
-          this.items = this.items.filter(item => item.product.id !== productId);
-        }
-      });
+      .subscribe();
   }
 
   changeQuantity(productId: number, newQuantity: number): void {
     this.shoppingCartService.updateQuantity(productId, newQuantity)
-      .subscribe(response => {
-        if (response.success) {
-          this.items.filter(item => item.product.id === productId).map(item => item.quantity = newQuantity);
-        }
-      });
+      .subscribe();
   }
 
   emptyCart(): void {
     this.shoppingCartService.emptyCart()
-      .subscribe(response => {
-        if (response.success) {
-          this.items = [];
-        }
-      });
+      .subscribe();
   }
 }

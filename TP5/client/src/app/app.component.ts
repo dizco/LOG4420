@@ -15,14 +15,12 @@ export class AppComponent {
     'Gabriel Bourgault'
   ];
 
-  itemsCount = 0;
-
   constructor(private shoppingCartService: ShoppingCartService) {
-    this.shoppingCartService.getItemsCount()
-      .subscribe(response => {
-        if (response.success) {
-          this.itemsCount = response.data;
-        }
-      });
+    this.shoppingCartService.loadItems()
+      .subscribe();
+  }
+
+  get itemsCount(): number {
+    return this.shoppingCartService.itemsCount;
   }
 }

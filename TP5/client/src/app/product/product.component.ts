@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product, ProductsService } from '../products.service';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 /**
  * Defines the component responsible to manage the product page.
@@ -12,6 +13,8 @@ import { Product, ProductsService } from '../products.service';
 export class ProductComponent implements OnInit {
 
   product: Product;
+  displayDialog = false;
+  dialogTimeout: number;
 
   /**
    * Initializes a new instance of the ProductComponent class.
@@ -19,8 +22,10 @@ export class ProductComponent implements OnInit {
    * @param route                   The active route.
    * @param router
    * @param productsService
+   * @param shoppingCartService
    */
-  constructor(private route: ActivatedRoute, private router: Router, private productsService: ProductsService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+              private productsService: ProductsService, private shoppingCartService: ShoppingCartService) { }
 
   /**
    * Occurs when the component is initialized.
@@ -38,5 +43,18 @@ export class ProductComponent implements OnInit {
           }
         });
     }
+  }
+
+  addToCart(quantity: string): void {
+    this.shoppingCartService.addItem({ product: this.product, quantity: parseInt(quantity) })
+      .subscribe(response => {
+        if (response.success) {
+          clearTimeout(this.dialogTimeout);
+          this.displayDialog = true;
+          this.dialogTimeout = window.setTimeout(() => {
+            this.displayDialog = false;
+          }, 5000);
+        }
+      });
   }
 }
