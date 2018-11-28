@@ -16,18 +16,18 @@
         </ul>
       </section>
       <hr>
-      <form class="pull-right" id="add-to-cart-form">
+      <form class="pull-right" id="add-to-cart-form" (ngSubmit)="onSubmit()">
         <label for="product-quantity">Quantité:</label>
         <input class="form-control" id="product-quantity" name="product-quantity"
-               type="number" value="1" min="1" required #quantity>&nbsp;
-        <button class="btn" title="Ajouter au panier" type="submit" (click)="addToCart(quantity.value)">
+               type="number" value="1" min="1" required [(ngModel)]="itemQuantity">&nbsp;
+        <button class="btn" title="Ajouter au panier" type="submit">
           <i class="fa fa-cart-plus"></i>&nbsp; Ajouter
         </button>
       </form>
       <p>Prix: <strong id="product-price">{{product.price | currency:'CAD':'symbol-narrow':'1.2-2':'fr' | noSpaces}}</strong></p>
     </div>
   </div>
-  <div class="dialog" id="dialog" *ngIf="displayDialog">
+  <div class="dialog" id="dialog" [hidden]="!displayDialog">
     Le produit a été ajouté au panier.
   </div>
 </article>

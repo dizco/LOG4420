@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   product: Product;
   displayDialog = false;
   dialogTimeout: number;
+  itemQuantity: number = 1;
 
   /**
    * Initializes a new instance of the ProductComponent class.
@@ -45,8 +46,12 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  addToCart(quantity: string): void {
-    this.shoppingCartService.addItem({ product: this.product, quantity: parseInt(quantity) })
+  onSubmit(): void {
+    this.addToCart(this.itemQuantity);
+  }
+
+  private addToCart(quantity: number): void {
+    this.shoppingCartService.addItem({ product: this.product, quantity: quantity })
       .subscribe(response => {
         if (response.success) {
           clearTimeout(this.dialogTimeout);

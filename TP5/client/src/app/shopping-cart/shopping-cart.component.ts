@@ -30,8 +30,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeItem(productId: number): void {
-    this.shoppingCartService.removeItem(productId)
-      .subscribe();
+    if (confirm('Êtes-vous certain de vouloir retirer cet item?')) {
+      this.shoppingCartService.removeItem(productId)
+        .subscribe();
+    }
   }
 
   changeQuantity(productId: number, newQuantity: number): void {
@@ -40,7 +42,9 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   emptyCart(): void {
-    this.shoppingCartService.emptyCart()
-      .subscribe();
+    if (confirm('Êtes-vous certain de vouloir vider le panier?')) {
+      this.shoppingCartService.emptyCart()
+        .subscribe();
+    }
   }
 }
