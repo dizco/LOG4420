@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ApiResponse } from './api-response';
 import { Config } from './config';
-import { catchError, map, take} from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 
 export interface Order {
   id: number;

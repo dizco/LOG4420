@@ -2,30 +2,28 @@
   <section>
     <h2>Catégories</h2>
     <div class="btn-group vertical" id="product-categories">
-      <button [class.selected]="category === productsCategories.Cameras" (click)="filterByCategory(productsCategories.Cameras)">Appareils photo</button>
+      <button [class.selected]="category === productsCategories.Cameras" (click)="filterByCategory(productsCategories.Cameras)">Appareils
+        photo</button>
       <button [class.selected]="category === productsCategories.Consoles" (click)="filterByCategory(productsCategories.Consoles)">Consoles</button>
       <button [class.selected]="category === productsCategories.Screens" (click)="filterByCategory(productsCategories.Screens)">Écrans</button>
       <button [class.selected]="category === productsCategories.Computers" (click)="filterByCategory(productsCategories.Computers)">Ordinateurs</button>
-      <button [class.selected]="category === productsCategories.All" (click)="filterByCategory(productsCategories.All)">Tous les produits</button>
+      <button [class.selected]="category === productsCategories.All" (click)="filterByCategory(productsCategories.All)">Tous
+        les produits</button>
     </div>
   </section>
   <section>
     <h2>Classement</h2>
     <div class="btn-group vertical" id="product-criteria">
-      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceLowHigh"
-              (click)="sortByCriteria(productsSortingCriteria.PriceLowHigh)">
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceLowHigh" (click)="sortByCriteria(productsSortingCriteria.PriceLowHigh)">
         Prix (bas-haut)
       </button>
-      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceHighLow"
-              (click)="sortByCriteria(productsSortingCriteria.PriceHighLow)">
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.PriceHighLow" (click)="sortByCriteria(productsSortingCriteria.PriceHighLow)">
         Prix (haut-bas)
       </button>
-      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaAscending"
-              (click)="sortByCriteria(productsSortingCriteria.AlphaAscending)">
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaAscending" (click)="sortByCriteria(productsSortingCriteria.AlphaAscending)">
         Nom (A-Z)
       </button>
-      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaDescending"
-              (click)="sortByCriteria(productsSortingCriteria.AlphaDescending)">
+      <button [class.selected]="sortingCriteria === productsSortingCriteria.AlphaDescending" (click)="sortByCriteria(productsSortingCriteria.AlphaDescending)">
         Nom (Z-A)
       </button>
     </div>

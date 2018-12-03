@@ -32,16 +32,16 @@ export class ShoppingCartService {
     }
     this.isLoaded = true;
 
-    //The logic here is complicated by the fact that the API returns only the product id but we need more information (name)
-    //See https://www.learnrxjs.io/operators/combination/forkjoin.html (example 2) for summary of steps followed
+    // The logic here is complicated by the fact that the API returns only the product id but we need more information (name)
+    // See https://www.learnrxjs.io/operators/combination/forkjoin.html (example 2) for summary of steps followed
 
     const url = `${Config.apiUrl}/shopping-cart`;
     return this.http.get<RawShoppingCartItem[]>(url, options)
       .pipe(
         take(1),
-        mergeMap(items => { //Allows multiple active inner subscriptions
+        mergeMap(items => { // Allows multiple active inner subscriptions
           return forkJoin(...items.map(item => {
-            //For each individual item, produce an http request to the server
+            // For each individual item, produce an http request to the server
             return this.http.get<Product>(`${Config.apiUrl}/products/${item.productId}`, options)
               .pipe(
                 switchMap(product => {

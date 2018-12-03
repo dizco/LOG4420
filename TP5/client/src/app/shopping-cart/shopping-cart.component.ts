@@ -18,7 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   get items(): ShoppingCartItem[] {
-    return this.shoppingCartService.items; //Reference items stored in the shared service
+    return this.shoppingCartService.items; // Reference items stored in the shared service
   }
 
   totalPrice(): number {

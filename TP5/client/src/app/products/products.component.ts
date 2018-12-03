@@ -9,7 +9,8 @@ import { ProductsCategories, Product, ProductsService, ProductsSortingCriteria }
   templateUrl: './products.component.html'
 })
 export class ProductsComponent {
-  productsSortingCriteria = ProductsSortingCriteria; //See https://stackoverflow.com/questions/44045311/cannot-approach-typescript-enum-within-html
+  productsSortingCriteria = ProductsSortingCriteria;
+  // See https://stackoverflow.com/questions/44045311/cannot-approach-typescript-enum-within-html
   productsCategories = ProductsCategories;
 
   sortingCriteria: string = ProductsSortingCriteria.PriceLowHigh;

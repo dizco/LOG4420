@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
   product: Product;
   displayDialog = false;
   dialogTimeout: number;
-  itemQuantity: number = 1;
+  itemQuantity = 1;
 
   /**
    * Initializes a new instance of the ProductComponent class.
@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
    * @param shoppingCartService
    */
   constructor(private route: ActivatedRoute, private router: Router,
-              private productsService: ProductsService, private shoppingCartService: ShoppingCartService) { }
+    private productsService: ProductsService, private shoppingCartService: ShoppingCartService) { }
 
   /**
    * Occurs when the component is initialized.
@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
             this.product = response.data;
           }
           else {
-            this.router.navigateByUrl('/404', { skipLocationChange: true }); //Display 404 page while leaving url intact
+            this.router.navigateByUrl('/404', { skipLocationChange: true }); // Display 404 page while leaving url intact
           }
         });
     }

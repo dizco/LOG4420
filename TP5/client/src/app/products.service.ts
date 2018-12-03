@@ -63,7 +63,7 @@ export class ProductsService {
       params = params.append('criteria', sortingCriteria);
     }
 
-    return this.http.get<Product[]>(url, {params: params})
+    return this.http.get<Product[]>(url, { params: params })
       .pipe(
         take(1),
         map(products => new ApiResponse<Product[]>(true, products)),
