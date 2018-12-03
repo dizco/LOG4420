@@ -51,6 +51,7 @@ export class ProductComponent implements OnInit {
   }
 
   private addToCart(quantity: number): void {
+    // TODO: Call a PUT here if the item already is in the shopping cart
     this.shoppingCartService.addItem({ product: this.product, quantity: quantity })
       .subscribe(response => {
         if (response.success) {

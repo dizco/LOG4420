@@ -69,15 +69,28 @@ export class ShoppingCartService {
 
   addItem(item: ShoppingCartItem): Observable<ApiResponse<{}>> {
     const url = `${Config.apiUrl}/shopping-cart`;
-    return this.http.post(url, { productId: item.product.id, quantity: item.quantity }, options)
-      .pipe(
-        tap(() => this.items.push(item)),
-        map(() => new ApiResponse<{}>(true)),
-        catchError(err => {
-          console.error('An error occurred', err);
-          return of(new ApiResponse<{}>(false, null, err));
-        }),
-      );
+    const itemIdx: number = this.items.findIndex(existingItem => existingItem.product.id === item.product.id);
+    if (itemIdx !== -1) {
+      return this.http.put(url + '/' + this.items[itemIdx].product.id, { quantity: this.items[itemIdx].quantity + item.quantity }, options)
+        .pipe(
+          tap(() => this.items[itemIdx].quantity += item.quantity),
+          map(() => new ApiResponse<{}>(true)),
+          catchError(err => {
+            console.error('An error occurred', err);
+            return of(new ApiResponse<{}>(false, null, err));
+          }),
+        );
+    } else {
+      return this.http.post(url, { productId: item.product.id, quantity: item.quantity }, options)
+        .pipe(
+          tap(() => this.items.push(item)),
+          map(() => new ApiResponse<{}>(true)),
+          catchError(err => {
+            console.error('An error occurred', err);
+            return of(new ApiResponse<{}>(false, null, err));
+          }),
+        );
+    }
   }
 
   removeItem(productId: number): Observable<ApiResponse<{}>> {

@@ -18,6 +18,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { NoSpacesPipe } from './no-spaces.pipe';
 import { ShoppingCartService } from './shopping-cart.service';
+import { OrderService } from './order.service';
 
 registerLocaleData(localeFr);
 
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     ProductsService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })
